@@ -3,12 +3,12 @@ from signal import pause
 from datetime import datetime
 
 
-def next_consumption():
+def next_consumption(pin):
     print("Consumption at {0}".format(datetime.now()))
 
 
 def listen_to_input_events():
-    sensor = DigitalInputDevice("GPIO4")
+    sensor = DigitalInputDevice("GPIO4", pull_up=True)
     sensor.when_activated = next_consumption
 
 
