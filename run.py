@@ -3,6 +3,7 @@ from signal import pause
 from datetime import datetime
 
 
+# noinspection PyUnusedLocal
 def next_consumption(pin):
     print("Consumption at {0}".format(datetime.now()))
 
