@@ -1,12 +1,5 @@
 version: "3.9"
 services:
-  mqtt:
-    image: eclipse-mosquitto:2.0
-    ports:
-      - "1883:1883"
-    volumes:
-      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-
   influxdb:
     image: influxdb:2.0
     ports:
@@ -16,18 +9,16 @@ services:
       - DOCKER_INFLUXDB_INIT_USERNAME=influx
       - DOCKER_INFLUXDB_INIT_PASSWORD=influx-password
       - DOCKER_INFLUXDB_INIT_ORG=sch8fa
-      - DOCKER_INFLUXDB_INIT_BUCKET=gas
+      - DOCKER_INFLUXDB_INIT_BUCKET=sensors
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=influx-auth-token
     volumes:
       - influxdb:/var/lib/influxdb2
 
-  telegraf:
-    image: telegraf:1.18
+  gasmeter:
+    build: .
     depends_on:
       - influxdb
-    restart: on-failure:3
-    volumes:
-      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    # restart: always
 
 volumes:
   influxdb:
