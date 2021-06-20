@@ -10,7 +10,7 @@ def write_consumption():
     client = InfluxDBClient(url="http://influxdb:8086", org="sch8fa", token="influx-auth-token")
     write_api = client.write_api(write_options=SYNCHRONOUS)
     p = Point("gas").field("consumption", 0.01)
-    write_api.write(bucket="gas", record=p)
+    write_api.write(bucket="sensors", record=p)
     client.close()
 
 

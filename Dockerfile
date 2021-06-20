@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY run.py .
 
-CMD ["wait-for-it", "influxdb:8086", "-t", "60", "--", "python", "run.py"]
+CMD ["wait-for-it", "influxdb:8086", "-t", "60", "--", "python", "-u", "run.py"]
